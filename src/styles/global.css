@@ -1,0 +1,327 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   FABIAN KROEGER — Automation Architect
+   Bold, modern aesthetic inspired by brave brand agencies
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Import distinctive typography */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Fragment+Mono:wght@400&display=swap');
+
+/* CSS Custom Properties */
+:root {
+  /* Colors — High contrast with bold accent */
+  --color-black: #0c0c0c;
+  --color-white: #ffffff;
+  --color-cream: #f7f7f7;
+  --color-gray: #a7a9ac;
+  --color-gray-dark: #1a1c1d;
+
+/* ═══ ACCENT COLOR OPTIONS ═══
+   Uncomment ONE pair to change the accent color across the site:
+
+   LIME (current):     --color-accent: #c8ff00; --color-accent-hover: #b8ef00;
+   CORAL:              --color-accent: #FF6B47; --color-accent-hover: #FF5533;
+   ELECTRIC BLUE:      --color-accent: #4F46E5; --color-accent-hover: #4338CA;
+   GOLD:               --color-accent: #F59E0B; --color-accent-hover: #D97706;
+   TEAL:               --color-accent: #06B6D4; --color-accent-hover: #0891B2;
+   ═══════════════════════════════ */
+
+  --color-accent: #00FF9C;
+  --color-accent-hover: #00E68A;
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Fragment Mono', monospace;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 10rem;
+
+  /* Animation */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --duration-fast: 0.2s;
+  --duration-base: 0.4s;
+  --duration-slow: 0.8s;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  overflow-x: hidden;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+p {
+  margin-bottom: 1.5rem;
+  max-width: 60ch;
+  color: var(--color-gray-dark);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out-quart);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   NAVIGATION — Bold, minimal header
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  transition: all var(--duration-base) var(--ease-out-expo);
+}
+
+.nav-scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-black);
+  letter-spacing: -0.02em;
+  transition: all var(--duration-base) var(--ease-out-quart);
+}
+
+.nav-logo:hover {
+  color: var(--color-gray);
+}
+
+.logo-dot {
+  color: var(--color-accent);
+}
+
+.nav-menu {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  list-style: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--color-black);
+  position: relative;
+  transition: all var(--duration-base) var(--ease-out-quart);
+}
+
+.nav-link:hover {
+  color: var(--color-gray);
+}
+
+.nav-cta {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--color-black);
+  color: var(--color-white);
+  border-radius: 100px;
+  transition: all var(--duration-base) var(--ease-out-quart);
+}
+
+.nav-cta:hover {
+  background: var(--color-accent);
+  color: var(--color-black);
+  transform: scale(1.02);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTONS — Bold, confident styling
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.125rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: all var(--duration-base) var(--ease-out-quart);
+  text-decoration: none;
+  border-radius: 100px;
+}
+
+.btn-primary {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent);
+  color: var(--color-black);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-black);
+  border: 1.5px solid var(--color-black);
+}
+
+.btn-outline:hover {
+  background: var(--color-black);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: var(--color-black);
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-accent { color: var(--color-accent); }
+.text-muted { color: var(--color-gray); }
+
+.section-dark {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.section-cream {
+  background-color: var(--color-cream);
+}
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+  width: 100%;
+}
+
+/* Mono text styling */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Label styling */
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 810px) {
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-logo {
+    font-size: 1.25rem;
+  }
+
+  .btn {
+    padding: 1rem 1.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CUSTOM SCROLLBAR
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-black);
+}

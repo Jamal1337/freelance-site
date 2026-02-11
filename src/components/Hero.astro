@@ -1,0 +1,314 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-container">
+    <!-- Main Content -->
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="label-number">01</span>
+        <span class="label-text">E-commerce Developer</span>
+      </div>
+
+      <h1 class="hero-title">
+        I build software that
+        <span class="title-accent">scales brands</span>
+      </h1>
+
+      <p class="hero-description">
+        Custom tools, integrations, and automation for e-commerce.
+        The systems that let you grow without growing your team.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">
+          Start a project
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#portfolio" class="btn btn-outline">View work</a>
+      </div>
+    </div>
+
+    <!-- Stats Column - Right Side -->
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-value">€2M+</span>
+        <span class="stat-label">Revenue Generated</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">50+</span>
+        <span class="stat-label">Systems Built</span>
+      </div>
+      <div class="stat">
+        <span class="stat-value">75%</span>
+        <span class="stat-label">Less Manual Work</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-cta">
+    <span class="scroll-text">Scroll to explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--color-white);
+    padding: 7rem 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  /* Label */
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .label-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    letter-spacing: 0.05em;
+  }
+
+  .label-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-black);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Title */
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-black);
+    max-width: 1000px;
+    margin-bottom: 2.5rem;
+  }
+
+  .title-accent {
+    color: var(--color-black);
+    position: relative;
+    z-index: 1;
+  }
+
+  .title-accent::before {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: -0.3em;
+    right: -0.3em;
+    height: 0.35em;
+    background-color: #00FF9C;
+    -webkit-mask: url('/brush-stroke.png') center/100% 100% no-repeat;
+    mask: url('/brush-stroke.png') center/100% 100% no-repeat;
+    z-index: -1;
+  }
+
+  /* Description */
+  .hero-description {
+    font-family: var(--font-body);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    line-height: 1.6;
+    color: var(--color-gray);
+    max-width: 600px;
+    margin-bottom: 3rem;
+  }
+
+  /* CTAs */
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-ctas .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.125rem 2.25rem;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-out-quart);
+  }
+
+  .hero-ctas .btn-primary {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .hero-ctas .btn-primary:hover {
+    background: var(--color-accent);
+    color: var(--color-black);
+    transform: translateY(-2px);
+  }
+
+  .hero-ctas .btn-outline {
+    background: transparent;
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+  }
+
+  .hero-ctas .btn-outline:hover {
+    background: var(--color-black);
+    color: var(--color-white);
+    transform: translateY(-2px);
+  }
+
+  .hero-ctas .btn svg {
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+
+  .hero-ctas .btn:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Stats - Vertical on right */
+  .hero-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    padding-left: 3rem;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: var(--color-black);
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Scroll Indicator */
+  .scroll-cta {
+    position: absolute;
+    bottom: 2rem;
+    left: clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .scroll-text {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 60px;
+    height: 1px;
+    background: var(--color-gray);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--color-black);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero-stats {
+      flex-direction: row;
+      gap: 3rem;
+      padding-left: 0;
+      padding-top: 2rem;
+      border-left: none;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 8rem 0 4rem;
+    }
+
+    .hero-stats {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+    }
+
+    .hero-ctas .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .scroll-cta {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,215 @@
+---
+const services = [
+  {
+    number: "01",
+    title: "Individuelle Software",
+    description: "Maßgeschneiderte Tools und Systeme für deine spezifischen Workflows. Von internen Dashboards bis zu kundenorientierten Apps.",
+    examples: ["Admin Dashboards", "Inventarsysteme", "Reporting Tools", "Individuelle Apps"]
+  },
+  {
+    number: "02",
+    title: "E-Commerce Integrationen",
+    description: "Verbinde deinen Tech Stack und erweitere deine Plattform. Shopify Apps, Headless Builds und Drittanbieter-Integrationen.",
+    examples: ["Shopify Apps", "Headless Storefronts", "ERP Anbindungen", "Zahlungssysteme"]
+  },
+  {
+    number: "03",
+    title: "Messaging Automatisierung",
+    description: "Automatisierte Kundenkommunikation, die Umsatz generiert. WhatsApp, E-Mail Flows und Conversational Systems.",
+    examples: ["WhatsApp Business", "Klaviyo Flows", "SMS Kampagnen", "Chatbots"]
+  },
+  {
+    number: "04",
+    title: "Growth Infrastruktur",
+    description: "Das technische Rückgrat für Skalierung. Analytics, Attribution und die Systeme, die Entscheidungen informieren.",
+    examples: ["Analytics Pipelines", "Attribution Systeme", "A/B Testing", "Data Warehouses"]
+  }
+];
+---
+
+<section id="services" class="services">
+  <div class="services-container">
+    <!-- Header -->
+    <header class="services-header">
+      <div class="header-left">
+        <div class="header-label">
+          <span class="label-number">02</span>
+          <span class="label-text">Leistungen</span>
+        </div>
+        <h2 class="services-title">
+          Was ich <span class="title-accent">entwickle</span>
+        </h2>
+      </div>
+      <div class="header-right">
+        <p class="services-subtitle">
+          End-to-End Entwicklung für E-Commerce Marken. Von der Idee bis zur Produktion.
+        </p>
+      </div>
+    </header>
+
+    <!-- Services Grid -->
+    <div class="services-grid">
+      {services.map((service) => (
+        <div class="service-card">
+          <span class="service-number">{service.number}</span>
+          <h3 class="service-title">{service.title}</h3>
+          <p class="service-description">{service.description}</p>
+          <div class="service-examples">
+            {service.examples.map((example) => (
+              <span class="example-tag">{example}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: #0c0c0c;
+    padding: clamp(5rem, 12vw, 10rem) 0;
+    position: relative;
+  }
+
+  .services-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .services-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: end;
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .header-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .label-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #a7a9ac;
+    letter-spacing: 0.05em;
+  }
+
+  .label-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .services-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .title-accent {
+    color: var(--color-accent);
+  }
+
+  .services-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    color: #a7a9ac;
+    max-width: 400px;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .service-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: clamp(2rem, 4vw, 3rem);
+    transition: all 0.4s var(--ease-out-quart);
+  }
+
+  .service-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .service-number {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .service-description {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #a7a9ac;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-examples {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .example-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0.375rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    transition: all 0.3s var(--ease-out-quart);
+  }
+
+  .service-card:hover .example-tag {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  @media (max-width: 968px) {
+    .services-header {
+      grid-template-columns: 1fr;
+    }
+
+    .services-subtitle {
+      margin-left: 0;
+      max-width: 500px;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

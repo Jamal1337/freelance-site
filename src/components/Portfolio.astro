@@ -1,0 +1,406 @@
+---
+import { projects } from '../data/projects.js';
+
+// Placeholder colors for each project
+const placeholderColors = [
+  'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+  'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+  'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+];
+---
+
+<section id="portfolio" class="portfolio">
+  <div class="portfolio-container">
+    <!-- Header -->
+    <header class="portfolio-header">
+      <div class="header-left">
+        <div class="header-label">
+          <span class="label-number">03</span>
+          <span class="label-text">Portfolio</span>
+        </div>
+        <h2 class="portfolio-title">
+          Projects I've <span class="title-accent">built</span>
+        </h2>
+      </div>
+      <div class="header-right">
+        <p class="portfolio-subtitle">
+          A selection of custom systems and automation projects
+        </p>
+      </div>
+    </header>
+
+    <!-- Two Column Masonry Grid -->
+    <div class="projects-grid">
+      <div class="grid-column">
+        {projects.filter((_, i) => i % 2 === 0).map((project, idx) => {
+          const originalIndex = idx * 2;
+          return (
+            <a href={`/work/${project.slug}`} class={`project-card size-${project.size}`}>
+              <div class="project-image" style={`background: ${placeholderColors[originalIndex % placeholderColors.length]}`}>
+                {project.images.thumbnail ? (
+                  <img src={project.images.thumbnail} alt={project.title} class="project-img" />
+                ) : (
+                  <div class="image-placeholder">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                )}
+                <div class="project-overlay">
+                  <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"/>
+                    <polyline points="7 7 17 7 17 17"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="project-content">
+                <h3 class="project-title">{project.title}</h3>
+                <p class="project-description">{project.shortDescription}</p>
+                <div class="project-tags">
+                  {project.tags.slice(0, 2).map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+      <div class="grid-column">
+        {projects.filter((_, i) => i % 2 === 1).map((project, idx) => {
+          const originalIndex = idx * 2 + 1;
+          return (
+            <a href={`/work/${project.slug}`} class={`project-card size-${project.size}`}>
+              <div class="project-image" style={`background: ${placeholderColors[originalIndex % placeholderColors.length]}`}>
+                {project.images.thumbnail ? (
+                  <img src={project.images.thumbnail} alt={project.title} class="project-img" />
+                ) : (
+                  <div class="image-placeholder">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                )}
+                <div class="project-overlay">
+                  <svg class="arrow-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"/>
+                    <polyline points="7 7 17 7 17 17"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="project-content">
+                <h3 class="project-title">{project.title}</h3>
+                <p class="project-description">{project.shortDescription}</p>
+                <div class="project-tags">
+                  {project.tags.slice(0, 2).map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <!-- View All Link -->
+    <div class="portfolio-footer">
+      <a href="#contact" class="view-all">
+        <span>Start a project</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .portfolio {
+    background: #f7f7f7;
+    padding: clamp(5rem, 12vw, 10rem) 0;
+    position: relative;
+  }
+
+  .portfolio-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  /* Header */
+  .portfolio-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: end;
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .label-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #a7a9ac;
+    letter-spacing: 0.05em;
+  }
+
+  .label-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #0c0c0c;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    color: #0c0c0c;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .title-accent {
+    color: #0c0c0c;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+  }
+
+  .title-accent::before {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: -0.1em;
+    right: -0.1em;
+    height: 0.35em;
+    background-color: #00FF9C;
+    -webkit-mask: url('/brush-stroke.png') center/100% 100% no-repeat;
+    mask: url('/brush-stroke.png') center/100% 100% no-repeat;
+    z-index: -1;
+  }
+
+  .portfolio-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    color: #a7a9ac;
+    max-width: 400px;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+
+  /* Two Column Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Offset the second column */
+  .grid-column:nth-child(2) {
+    margin-top: clamp(4rem, 8vw, 6rem);
+  }
+
+  /* Project Card */
+  .project-card {
+    display: block;
+    text-decoration: none;
+  }
+
+  /* Project Image - Different aspect ratios based on size */
+  .project-image {
+    position: relative;
+    overflow: hidden;
+    background: #e5e5e5;
+    border-radius: 8px;
+  }
+
+  .project-card.size-tall .project-image {
+    aspect-ratio: 3 / 4;
+  }
+
+  .project-card.size-wide .project-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-card.size-square .project-image {
+    aspect-ratio: 1 / 1;
+  }
+
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+
+  .project-card:hover .project-img {
+    transform: scale(1.05);
+  }
+
+  .image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Overlay with arrow */
+  .project-overlay {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    background: var(--color-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translate(10px, -10px);
+    transition: all 0.4s var(--ease-out-expo);
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  .arrow-icon {
+    color: #0c0c0c;
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Project Content */
+  .project-content {
+    padding: 1.25rem 0 0 0;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    font-weight: 600;
+    color: #0c0c0c;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .project-description {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  /* Project Tags */
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #666;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 100px;
+  }
+
+  /* Portfolio Footer */
+  .portfolio-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: clamp(4rem, 8vw, 6rem);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .view-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 600;
+    color: #0c0c0c;
+    text-decoration: none;
+    transition: all 0.3s var(--ease-out-quart);
+  }
+
+  .view-all:hover {
+    gap: 1rem;
+  }
+
+  .view-all svg {
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+
+  .view-all:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .portfolio-header {
+      grid-template-columns: 1fr;
+    }
+
+    .portfolio-subtitle {
+      margin-left: 0;
+      max-width: 500px;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .grid-column:nth-child(2) {
+      margin-top: 0;
+    }
+
+    .project-card.size-tall .project-image,
+    .project-card.size-wide .project-image,
+    .project-card.size-square .project-image {
+      aspect-ratio: 4 / 3;
+    }
+
+    .project-overlay {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+</style>

@@ -1,49 +1,39 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Metrics from '../components/Metrics.astro';
-import ServicesSimple from '../components/ServicesSimple.astro';
-// import Services from '../components/Services.astro'; // Hidden - funnel visualization kept for future use
-// import CaseStudies from '../components/CaseStudies.astro'; // Hidden - kept for future use
-import Portfolio from '../components/Portfolio.astro';
-import Process from '../components/Process.astro';
-import About from '../components/About.astro';
-// import Pricing from '../components/Pricing.astro'; // Hidden for now
-import Contact from '../components/Contact.astro';
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/de/Hero.astro';
+import Metrics from '../../components/de/Metrics.astro';
+import ServicesSimple from '../../components/de/ServicesSimple.astro';
+import Portfolio from '../../components/de/Portfolio.astro';
+import Process from '../../components/de/Process.astro';
+import About from '../../components/de/About.astro';
+import Contact from '../../components/de/Contact.astro';
 ---
 
 <Layout
-  title="Fabian Eppinger - E-commerce Developer"
-  description="Custom automation, integrations, and software development for e-commerce brands. Based in Germany, working globally."
-  lang="en"
+  title="Fabian Eppinger - E-Commerce Entwickler"
+  description="Individuelle Automatisierung, Integrationen und Softwareentwicklung für E-Commerce Marken. Standort Deutschland, weltweit tätig."
+  lang="de"
 >
   <Hero />
   <Metrics />
   <ServicesSimple />
-  <!-- <CaseStudies /> -->
   <Portfolio />
   <Process />
   <About />
-  <!-- <Pricing /> -->
   <Contact />
-  
+
   <!-- GSAP and ScrollTrigger for animations -->
   <script>
     import gsap from 'gsap';
     import { ScrollTrigger } from 'gsap/ScrollTrigger';
-    
+
     gsap.registerPlugin(ScrollTrigger);
-    
-    // Wait for DOM to be ready
+
     document.addEventListener('DOMContentLoaded', () => {
-      
-      // Fade in animations
+
       gsap.utils.toArray('.fade-in').forEach((element) => {
-        gsap.fromTo(element, 
-          {
-            opacity: 0,
-            y: 20
-          },
+        gsap.fromTo(element,
+          { opacity: 0, y: 20 },
           {
             opacity: 1,
             y: 0,
@@ -58,14 +48,10 @@ import Contact from '../components/Contact.astro';
           }
         );
       });
-      
-      // Slide up animations
+
       gsap.utils.toArray('.slide-up').forEach((element, index) => {
         gsap.fromTo(element,
-          {
-            opacity: 0,
-            y: 40
-          },
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
             y: 0,
@@ -81,14 +67,10 @@ import Contact from '../components/Contact.astro';
           }
         );
       });
-      
-      // Scale in animations
+
       gsap.utils.toArray('.scale-in').forEach((element, index) => {
         gsap.fromTo(element,
-          {
-            opacity: 0,
-            scale: 0.9
-          },
+          { opacity: 0, scale: 0.9 },
           {
             opacity: 1,
             scale: 1,
@@ -104,8 +86,7 @@ import Contact from '../components/Contact.astro';
           }
         );
       });
-      
-      // Parallax effect for hero section
+
       gsap.to('.hero-shape', {
         yPercent: -50,
         ease: 'none',
@@ -116,15 +97,11 @@ import Contact from '../components/Contact.astro';
           scrub: true
         }
       });
-      
-      // Stagger animations for cards
+
       const serviceCards = gsap.utils.toArray('.service-card');
       if (serviceCards.length) {
         gsap.fromTo(serviceCards,
-          {
-            opacity: 0,
-            y: 30
-          },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
@@ -138,16 +115,11 @@ import Contact from '../components/Contact.astro';
           }
         );
       }
-      
-      // Case study cards animation
+
       const caseCards = gsap.utils.toArray('.case-card');
       if (caseCards.length) {
         gsap.fromTo(caseCards,
-          {
-            opacity: 0,
-            y: 40,
-            scale: 0.95
-          },
+          { opacity: 0, y: 40, scale: 0.95 },
           {
             opacity: 1,
             y: 0,
@@ -162,16 +134,12 @@ import Contact from '../components/Contact.astro';
           }
         );
       }
-      
-      // Process timeline animation
+
       const processSteps = gsap.utils.toArray('.process-step');
       if (processSteps.length) {
         processSteps.forEach((step, index) => {
           gsap.fromTo(step,
-            {
-              opacity: 0,
-              x: -30
-            },
+            { opacity: 0, x: -30 },
             {
               opacity: 1,
               x: 0,
@@ -186,16 +154,11 @@ import Contact from '../components/Contact.astro';
           );
         });
       }
-      
-      // Pricing cards animation
+
       const pricingCards = gsap.utils.toArray('.pricing-card');
       if (pricingCards.length) {
         gsap.fromTo(pricingCards,
-          {
-            opacity: 0,
-            y: 30,
-            scale: 0.95
-          },
+          { opacity: 0, y: 30, scale: 0.95 },
           {
             opacity: 1,
             y: 0,
@@ -210,16 +173,13 @@ import Contact from '../components/Contact.astro';
           }
         );
       }
-      
-      // Number counter animation for stats
+
       const statNumbers = gsap.utils.toArray('.stat-number');
       statNumbers.forEach((stat) => {
         const text = stat.textContent;
         if (text && text.includes('100k')) {
           gsap.fromTo(stat,
-            {
-              textContent: 0
-            },
+            { textContent: 0 },
             {
               textContent: 100,
               duration: 2,
@@ -236,14 +196,12 @@ import Contact from '../components/Contact.astro';
           );
         }
       });
-      
-      // Smooth scroll behavior
+
       ScrollTrigger.config({
         limitCallbacks: true,
         syncInterval: 40
       });
-      
-      // Refresh ScrollTrigger on window resize
+
       window.addEventListener('resize', () => {
         ScrollTrigger.refresh();
       });

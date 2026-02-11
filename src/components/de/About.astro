@@ -1,0 +1,293 @@
+---
+const techStack = [
+  { name: "React / Next.js", category: "Frontend" },
+  { name: "Node.js", category: "Backend" },
+  { name: "TypeScript", category: "Sprache" },
+  { name: "MongoDB", category: "Datenbank" },
+  { name: "Shopify API", category: "E-Commerce" },
+  { name: "WhatsApp API", category: "Messaging" },
+  { name: "Meta API", category: "Werbung" },
+  { name: "AWS / Vercel", category: "Infrastruktur" }
+];
+---
+
+<section id="about" class="about">
+  <div class="about-container">
+    <!-- Split Layout -->
+    <div class="about-grid">
+      <!-- Left: Editorial Content -->
+      <div class="about-content">
+        <div class="content-label">
+          <span class="label-number">05</span>
+          <span class="label-text">Über mich</span>
+        </div>
+
+        <h2 class="about-title">
+          Vom Operator zum
+          <span class="title-accent">Automatisierungs-Architekten</span>
+        </h2>
+
+        <div class="about-body">
+          <p class="lead">
+            Nachdem ich Millionen in Meta Ads investiert und 7-stellige Funnels gebaut habe,
+            entdeckte ich den wahren Hebel: Individuelle Software schlägt jede Marketing-Strategie.
+          </p>
+
+          <p>
+            Ich war auf beiden Seiten—habe €100k+ tägliches Werbebudget verwaltet, Conversion-Raten
+            optimiert, Retention-Strategien entwickelt. Aber die größten Erfolge kamen durch
+            Automatisierung: WhatsApp-Flows, die die Retention verdoppelten, Zeiterfassungssysteme,
+            die 15 Stunden wöchentlich sparten, individuelle Shopify-Apps, die Abläufe skalierten.
+          </p>
+
+          <p>
+            Heute arbeite ich als technischer Mitgründer auf Abruf. Ich identifiziere die Engpässe,
+            die dein Wachstum bremsen, und baue dann individuelle Lösungen, die den Output deines
+            Teams vervielfachen. Jedes System, das ich baue, amortisiert sich in 3-6 Monaten.
+          </p>
+        </div>
+
+        <!-- Highlights -->
+        <div class="about-highlights">
+          <div class="highlight">
+            <span class="highlight-label">Standort</span>
+            <span class="highlight-value">Deutschland</span>
+          </div>
+          <div class="highlight">
+            <span class="highlight-label">Arbeitsweise</span>
+            <span class="highlight-value">Remote-first</span>
+          </div>
+          <div class="highlight">
+            <span class="highlight-label">Kunden</span>
+            <span class="highlight-value">Weltweit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Photo + Tech Stack Card -->
+      <div class="about-visual">
+        <div class="about-image-wrapper">
+          <img src="/images/fabian-profile.webp" alt="Fabian Eppinger" class="about-image" />
+        </div>
+
+        <div class="stack-card">
+          <div class="stack-header">
+            <span class="stack-label">Tech Stack</span>
+            <span class="stack-year">2026</span>
+          </div>
+
+          <div class="stack-grid">
+            {techStack.map((tech) => (
+              <div class="stack-item">
+                <span class="item-name">{tech.name}</span>
+                <span class="item-category">{tech.category}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background: #0c0c0c;
+    padding: clamp(5rem, 12vw, 10rem) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .about-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: clamp(4rem, 8vw, 8rem);
+  }
+
+  .about-content {
+    flex: 1;
+    max-width: 600px;
+  }
+
+  .content-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .label-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #a7a9ac;
+    letter-spacing: 0.05em;
+  }
+
+  .label-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+    letter-spacing: -0.03em;
+  }
+
+  .title-accent {
+    color: var(--color-accent);
+    display: block;
+  }
+
+  .about-body { margin-bottom: 3rem; }
+
+  .about-body .lead {
+    font-family: var(--font-body);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    line-height: 1.7;
+    color: #ffffff;
+    margin-bottom: 2rem;
+  }
+
+  .about-body p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #a7a9ac;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-body p:last-child { margin-bottom: 0; }
+
+  .about-highlights {
+    display: flex;
+    gap: clamp(2rem, 4vw, 4rem);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .highlight {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .highlight-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+  }
+
+  .highlight-value {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .about-visual {
+    flex-shrink: 0;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about-image-wrapper { width: 100%; }
+
+  .about-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+  }
+
+  .stack-card {
+    background: #ffffff;
+    padding: clamp(1.5rem, 2.5vw, 2rem);
+  }
+
+  .stack-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.875rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .stack-label {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0c0c0c;
+  }
+
+  .stack-year {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    color: #a7a9ac;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1rem;
+  }
+
+  .stack-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .stack-item:hover .item-name { color: #0c0c0c; }
+
+  .item-name {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #0c0c0c;
+    transition: color 0.3s ease;
+  }
+
+  .item-category {
+    font-family: var(--font-mono);
+    font-size: 0.5625rem;
+    color: #a7a9ac;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 1024px) {
+    .about-grid { flex-direction: column; gap: 4rem; }
+    .about-visual { width: 100%; max-width: 500px; }
+  }
+
+  @media (max-width: 768px) {
+    .about-highlights { flex-direction: column; gap: 1.5rem; }
+    .highlight { flex-direction: row; justify-content: space-between; align-items: center; }
+    .stack-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,304 @@
+---
+const projects = [
+  {
+    number: "01",
+    title: "WhatsApp Automation Platform",
+    result: "€2M revenue generated",
+    category: "Custom Software",
+    description: "Built custom WhatsApp Business automation software that doubled returning customer rates. First-to-market solution in Germany with AI-powered conversational flows.",
+    tags: ["WhatsApp API", "Node.js", "Klaviyo"],
+    image: "whatsapp-dashboard.jpg",
+    imageAlt: "WhatsApp automation dashboard showing conversation flows",
+    imagePlaceholder: "Dashboard UI with chat flows, analytics graphs, and automation rules"
+  },
+  {
+    number: "02",
+    title: "Time Tracking System",
+    result: "15 hrs/week saved",
+    category: "Internal Tools",
+    description: "Complete employee management system with check-in/out functionality, task management, and automated payroll integration. 100% team adoption.",
+    tags: ["React", "PostgreSQL", "Automation"],
+    image: "time-tracking.jpg",
+    imageAlt: "Time tracking application interface",
+    imagePlaceholder: "Clean dashboard with time entries, employee list, and weekly overview charts"
+  },
+  {
+    number: "03",
+    title: "Headless Shopify",
+    result: "50% faster loads",
+    category: "E-commerce",
+    description: "Headless e-commerce platform with custom checkout flows, real-time inventory sync, and personalization engine. 25% conversion improvement.",
+    tags: ["Next.js", "Shopify API", "GraphQL"],
+    image: "shopify-headless.jpg",
+    imageAlt: "Headless Shopify storefront",
+    imagePlaceholder: "Modern e-commerce product page with sleek UI and fast-loading components"
+  },
+  {
+    number: "04",
+    title: "Marketing Automation Suite",
+    result: "€100k+ daily spend",
+    category: "AdTech",
+    description: "Automated campaign management system with custom attribution models, bid optimization algorithms, and creative testing framework.",
+    tags: ["Meta API", "Python", "Analytics"],
+    image: "marketing-automation.jpg",
+    imageAlt: "Marketing automation analytics dashboard",
+    imagePlaceholder: "Analytics dashboard with campaign performance, spend graphs, and ROAS metrics"
+  }
+];
+---
+
+<section id="case-studies" class="case-studies">
+  <div class="studies-container">
+    <!-- Header -->
+    <header class="studies-header">
+      <div class="header-left">
+        <div class="header-label">
+          <span class="label-number">03</span>
+          <span class="label-text">Selected Work</span>
+        </div>
+        <h2 class="studies-title">
+          <span class="title-accent">Systems</span> that
+          deliver results
+        </h2>
+      </div>
+      <div class="header-right">
+        <p class="studies-subtitle">
+          A selection of automation projects that drove measurable impact for D2C brands
+        </p>
+      </div>
+    </header>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      {projects.map((project, index) => (
+        <article class="project-card" style={`--card-index: ${index}`}>
+          <div class="card-top">
+            <span class="project-number">{project.number}</span>
+            <span class="project-category">{project.category}</span>
+          </div>
+
+          <h3 class="project-title">{project.title}</h3>
+          <p class="project-description">{project.description}</p>
+
+          <div class="card-bottom">
+            <div class="card-result">
+              <span class="result-value">{project.result}</span>
+            </div>
+            <div class="card-tags">
+              {project.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .case-studies {
+    background: #f7f7f7;
+    padding: clamp(5rem, 12vw, 10rem) 0;
+    position: relative;
+  }
+
+  .studies-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  /* Header */
+  .studies-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: end;
+    margin-bottom: clamp(4rem, 8vw, 6rem);
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header-label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .label-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #a7a9ac;
+    letter-spacing: 0.05em;
+  }
+
+  .label-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #0c0c0c;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .studies-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    color: #0c0c0c;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .title-accent {
+    color: #0c0c0c;
+    position: relative;
+    z-index: 1;
+  }
+
+  .title-accent::before {
+    content: '';
+    position: absolute;
+    bottom: 0.05em;
+    left: -0.3em;
+    right: -0.3em;
+    height: 0.35em;
+    background-color: #00FF9C;
+    -webkit-mask: url('/brush-stroke.png') center/100% 100% no-repeat;
+    mask: url('/brush-stroke.png') center/100% 100% no-repeat;
+    z-index: -1;
+  }
+
+  .studies-subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    color: #a7a9ac;
+    max-width: 400px;
+    margin-left: auto;
+    margin-bottom: 0;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s var(--ease-out-expo);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-accent);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-number {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .project-category {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 100px;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #0c0c0c;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .project-description {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: #a7a9ac;
+    margin-bottom: 0;
+    flex-grow: 1;
+  }
+
+  .card-bottom {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .card-result {
+    margin-bottom: 0.75rem;
+  }
+
+  .result-value {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0c0c0c;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: #a7a9ac;
+  }
+
+  .tag:not(:last-child)::after {
+    content: '·';
+    margin-left: 0.375rem;
+    color: #a7a9ac;
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .studies-header {
+      grid-template-columns: 1fr;
+    }
+
+    .studies-subtitle {
+      margin-left: 0;
+      max-width: 500px;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
