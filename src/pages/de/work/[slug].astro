@@ -1,0 +1,952 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { projects, getProjectBySlug, getNextProject, getPrevProject } from '../../../data/projects-de.js';
+
+export function getStaticPaths() {
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+const { project } = Astro.props;
+const nextProject = getNextProject(project.slug);
+---
+
+<Layout title={`${project.title} - Fabian Eppinger`} lang="de" solidNav={true}>
+  <article class="project-page">
+    <!-- Hero Section - Full Width Image with Title Overlay -->
+    <section class="project-hero">
+      <div class="hero-image">
+        {project.images.hero ? (
+          <img src={project.images.hero} alt={project.title} />
+        ) : (
+          <div class="image-placeholder">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <polyline points="21 15 16 10 5 21"/>
+            </svg>
+          </div>
+        )}
+      </div>
+      <div class="hero-overlay">
+        <div class="hero-content">
+          <div class="hero-meta">
+            <span class="project-category">{project.category}</span>
+            <span class="meta-dot">·</span>
+            <span class="project-year">{project.year}</span>
+          </div>
+          <h1 class="project-title">{project.title}</h1>
+          <p class="project-tagline">{project.shortDescription}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intro Section - Two Column -->
+    <section class="intro-section">
+      <div class="intro-container">
+        <div class="intro-left">
+          {project.isOwnProject ? (
+            <div class="own-project-info">
+              <span class="own-project-label">Eigenes Projekt</span>
+              <span class="own-project-category">{project.category}</span>
+              {project.url && (
+                <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-url">
+                  {project.url.replace('https://', '')}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </a>
+              )}
+            </div>
+          ) : (
+            <div class="client-info">
+              <span class="client-label">Kunde</span>
+              {project.clientUrl ? (
+                <a href={project.clientUrl} target="_blank" rel="noopener noreferrer" class="client-name-link">
+                  {project.client || 'Kunde'}
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </a>
+              ) : (
+                <span class="client-name">{project.client || 'Kunde'}</span>
+              )}
+              <span class="client-category">{project.category}</span>
+            </div>
+          )}
+        </div>
+        <div class="intro-right">
+          <p class="intro-text">{project.fullDescription}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section class="content-section">
+      <div class="content-container">
+        <span class="section-label">Die Herausforderung</span>
+        <p class="section-text">{project.challenge}</p>
+      </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="content-section">
+      <div class="content-container">
+        <span class="section-label">Unsere Lösung</span>
+        <p class="section-text">{project.solution}</p>
+      </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-section">
+      <div class="tech-container">
+        <span class="section-label">Tech Stack</span>
+        <div class="tech-grid">
+          {project.tags.map((tag) => (
+            <div class="tech-item">
+              <span class="tech-name">{tag}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+      <div class="gallery-scroll">
+        {project.images.gallery && project.images.gallery.length > 0 ? (
+          project.images.gallery.map((image, index) => (
+            <div class="gallery-item" data-lightbox={index}>
+              <img src={image} alt={`${project.title} Screenshot ${index + 1}`} />
+            </div>
+          ))
+        ) : (
+          <>
+            <div class="gallery-item placeholder">
+              <div class="placeholder-content">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+            </div>
+            <div class="gallery-item placeholder">
+              <div class="placeholder-content">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+            </div>
+            <div class="gallery-item placeholder">
+              <div class="placeholder-content">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    {project.images.gallery && project.images.gallery.length > 0 && (
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+        <div class="lightbox-content">
+          <img id="lightbox-img" src="" alt="" />
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+      </div>
+    )}
+
+    <!-- Results Section -->
+    {project.results && project.results.length > 0 && (
+      <section class="results-section">
+        <div class="results-container">
+          <span class="section-label">Das Ergebnis</span>
+          <div class="results-grid">
+            {project.results.map((result) => (
+              <div class="result-item">
+                <span class="result-value">{result}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Next Project Section -->
+    <section class="next-section">
+      <div class="next-container">
+        <span class="next-label">Nächstes Projekt</span>
+        <a href={`/de/work/${nextProject.slug}`} class="next-link">
+          <h2 class="next-title">{nextProject.title}</h2>
+          <svg class="next-arrow" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Back to Portfolio -->
+    <div class="back-section">
+      <a href="/de/#portfolio" class="back-link">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        <span>Zurück zu allen Projekten</span>
+      </a>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .project-page {
+    background: #ffffff;
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .project-hero {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    min-height: 500px;
+    max-height: 800px;
+    overflow: hidden;
+    margin-top: 52px;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-image .image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #e91e8c 0%, #9b4dca 50%, #00d4ff 100%);
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: clamp(2rem, 5vw, 4rem);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  }
+
+  .hero-content {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-category {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .meta-dot {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .project-year {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.05em;
+  }
+
+  .project-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .project-tagline {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+  }
+
+  /* Intro Section */
+  .intro-section {
+    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .intro-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .client-quote {
+    padding-right: 2rem;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .quote-icon {
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .quote-text {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+
+  .quote-author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .author-name {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0c0c0c;
+  }
+
+  .author-role {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+  }
+
+  .own-project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .own-project-label {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0c0c0c;
+  }
+
+  .own-project-category {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+  }
+
+  .client-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .client-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+    margin-bottom: 0.25rem;
+  }
+
+  .client-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0c0c0c;
+  }
+
+  .client-name-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0c0c0c;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .client-name-link:hover {
+    color: #666;
+  }
+
+  .client-name-link svg {
+    opacity: 0.5;
+    transition: all 0.2s ease;
+  }
+
+  .client-name-link:hover svg {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+
+  .client-category {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+    margin-top: 0.5rem;
+  }
+
+  .intro-text {
+    font-family: var(--font-body);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+    line-height: 1.7;
+    color: #333;
+  }
+
+  /* Content Sections */
+  .content-section {
+    padding: clamp(3rem, 6vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .content-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+  }
+
+  .section-text {
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 1.25vw, 1.125rem);
+    line-height: 1.8;
+    color: #333;
+    max-width: 800px;
+  }
+
+  /* Tech Stack Section */
+  .tech-section {
+    padding: clamp(3rem, 6vw, 4rem) clamp(1.5rem, 5vw, 4rem);
+    background: #f7f7f7;
+  }
+
+  .tech-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: clamp(2rem, 4vw, 4rem);
+    align-items: start;
+  }
+
+  .tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .tech-item {
+    background: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: all 0.3s var(--ease-out-quart);
+  }
+
+  .tech-item:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .project-url {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #666;
+    text-decoration: none;
+    margin-top: 1.25rem;
+    transition: color 0.2s ease;
+  }
+
+  .project-url:hover {
+    color: #0c0c0c;
+  }
+
+  .project-url svg {
+    opacity: 0.6;
+    transition: all 0.2s ease;
+  }
+
+  .project-url:hover svg {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+
+  .tech-name {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #0c0c0c;
+    letter-spacing: 0.02em;
+  }
+
+  /* Gallery Section */
+  .gallery-section {
+    padding: clamp(3rem, 6vw, 4rem) 0;
+    overflow: hidden;
+  }
+
+  .gallery-scroll {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .gallery-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-item {
+    flex: 0 0 auto;
+    width: clamp(300px, 40vw, 500px);
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    border: 1px solid #000;
+    box-shadow: none;
+    cursor: pointer;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .gallery-item.placeholder {
+    background: #f0f0f0;
+  }
+
+  .placeholder-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c0c0c0;
+  }
+
+  /* Results Section */
+  .results-section {
+    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+    background: #0c0c0c;
+  }
+
+  .results-container {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  .results-section .section-label {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+
+  .result-item {
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .result-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  /* Next Project Section */
+  .next-section {
+    padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+    background: #f7f7f7;
+  }
+
+  .next-container {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  .next-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+    margin-bottom: 1rem;
+  }
+
+  .next-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 0.3s var(--ease-out-quart);
+  }
+
+  .next-link:hover {
+    padding-left: 1rem;
+  }
+
+  .next-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #0c0c0c;
+    letter-spacing: -0.02em;
+    transition: color 0.3s var(--ease-out-quart);
+  }
+
+  .next-link:hover .next-title {
+    color: var(--color-accent);
+  }
+
+  .next-arrow {
+    color: #0c0c0c;
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+
+  .next-link:hover .next-arrow {
+    transform: translateX(8px);
+  }
+
+  /* Back Section */
+  .back-section {
+    padding: clamp(2rem, 4vw, 3rem) clamp(1.5rem, 5vw, 4rem);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: #a7a9ac;
+    text-decoration: none;
+    transition: color 0.3s var(--ease-out-quart);
+  }
+
+  .back-link:hover {
+    color: #0c0c0c;
+  }
+
+  .back-link svg {
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+
+  .back-link:hover svg {
+    transform: translateX(-4px);
+  }
+
+  /* Responsive */
+  @media (max-width: 968px) {
+    .intro-container {
+      grid-template-columns: 1fr;
+    }
+
+    .client-quote {
+      padding-right: 0;
+      padding-bottom: 2rem;
+      border-right: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .content-container,
+    .tech-container {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .section-label {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-hero {
+      height: 50vh;
+      min-height: 400px;
+    }
+
+    .gallery-item {
+      width: 80vw;
+    }
+
+    .next-link {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .next-link:hover {
+      padding-left: 0;
+    }
+  }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .lightbox-close:hover {
+    opacity: 1;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .lightbox-nav:hover {
+    opacity: 1;
+  }
+
+  .lightbox-prev {
+    left: 1rem;
+  }
+
+  .lightbox-next {
+    right: 1rem;
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+</style>
+
+<script>
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  const galleryItems = document.querySelectorAll('.gallery-item[data-lightbox]');
+
+  if (lightbox && galleryItems.length > 0) {
+    const images = Array.from(galleryItems).map(item => item.querySelector('img')?.src).filter(Boolean);
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    // Click handlers
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-next')?.addEventListener('click', showNext);
+    document.getElementById('lightbox-prev')?.addEventListener('click', showPrev);
+
+    // Click outside to close
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+    lightbox.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) showNext();
+        else showPrev();
+      }
+    });
+  }
+</script>

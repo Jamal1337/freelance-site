@@ -13,7 +13,7 @@ const { project } = Astro.props;
 const nextProject = getNextProject(project.slug);
 ---
 
-<Layout title={`${project.title} - Fabian Eppinger`}>
+<Layout title={`${project.title} - Fabian Eppinger`} solidNav={true}>
   <article class="project-page">
     <!-- Hero Section - Full Width Image with Title Overlay -->
     <section class="project-hero">
@@ -54,22 +54,56 @@ const nextProject = getNextProject(project.slug);
                 <path d="M21 7h-4a4 4 0 0 0-4 4v1a3 3 0 0 0 3 3h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-2" stroke="none"/>
               </svg>
             </div>
-            {project.testimonial ? (
+            {project.isOwnProject ? (
+              <div class="own-project-info">
+                <span class="own-project-label">Own Project</span>
+                <span class="own-project-category">{project.category}</span>
+                {project.url && (
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-url">
+                    {project.url.replace('https://', '')}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+                )}
+              </div>
+            ) : project.testimonial ? (
               <>
                 <p class="quote-text">{project.testimonial.text}</p>
                 <div class="quote-author">
                   <span class="author-name">{project.testimonial.author}</span>
                   <span class="author-role">{project.testimonial.role}</span>
                 </div>
+                {project.url && (
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="project-url">
+                    {project.url.replace('https://', '')}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+                )}
               </>
             ) : (
-              <>
-                <p class="quote-text">Working with Fabian transformed how we approach our technical challenges.</p>
-                <div class="quote-author">
-                  <span class="author-name">Client</span>
-                  <span class="author-role">{project.category}</span>
-                </div>
-              </>
+              <div class="client-info">
+                <span class="client-label">Client</span>
+                {project.clientUrl ? (
+                  <a href={project.clientUrl} target="_blank" rel="noopener noreferrer" class="client-name-link">
+                    {project.client || 'Client'}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                      <polyline points="15 3 21 3 21 9"/>
+                      <line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+                ) : (
+                  <span class="client-name">{project.client || 'Client'}</span>
+                )}
+                <span class="client-category">{project.category}</span>
+              </div>
             )}
           </div>
         </div>
@@ -114,7 +148,7 @@ const nextProject = getNextProject(project.slug);
       <div class="gallery-scroll">
         {project.images.gallery && project.images.gallery.length > 0 ? (
           project.images.gallery.map((image, index) => (
-            <div class="gallery-item">
+            <div class="gallery-item" data-lightbox={index}>
               <img src={image} alt={`${project.title} screenshot ${index + 1}`} />
             </div>
           ))
@@ -151,6 +185,32 @@ const nextProject = getNextProject(project.slug);
         )}
       </div>
     </section>
+
+    <!-- Lightbox -->
+    {project.images.gallery && project.images.gallery.length > 0 && (
+      <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+        <div class="lightbox-content">
+          <img id="lightbox-img" src="" alt="" />
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+      </div>
+    )}
 
     <!-- Results Section -->
     {project.results && project.results.length > 0 && (
@@ -209,6 +269,7 @@ const nextProject = getNextProject(project.slug);
     min-height: 500px;
     max-height: 800px;
     overflow: hidden;
+    margin-top: 52px;
   }
 
   .hero-image {
@@ -345,6 +406,84 @@ const nextProject = getNextProject(project.slug);
     color: #a7a9ac;
   }
 
+  .own-project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .own-project-label {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #0c0c0c;
+  }
+
+  .own-project-category {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+  }
+
+  .client-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .client-label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+    margin-bottom: 0.25rem;
+  }
+
+  .client-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0c0c0c;
+  }
+
+  .client-name-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0c0c0c;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .client-name-link:hover {
+    color: #666;
+  }
+
+  .client-name-link svg {
+    opacity: 0.5;
+    transition: all 0.2s ease;
+  }
+
+  .client-name-link:hover svg {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+
+  .client-category {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a7a9ac;
+    margin-top: 0.5rem;
+  }
+
   .intro-text {
     font-family: var(--font-body);
     font-size: clamp(1.125rem, 1.5vw, 1.375rem);
@@ -418,6 +557,32 @@ const nextProject = getNextProject(project.slug);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 
+  .project-url {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #666;
+    text-decoration: none;
+    margin-top: 1.25rem;
+    transition: color 0.2s ease;
+  }
+
+  .project-url:hover {
+    color: #0c0c0c;
+  }
+
+  .project-url svg {
+    opacity: 0.6;
+    transition: all 0.2s ease;
+  }
+
+  .project-url:hover svg {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+
   .tech-name {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
@@ -453,6 +618,9 @@ const nextProject = getNextProject(project.slug);
     border-radius: 12px;
     overflow: hidden;
     scroll-snap-align: start;
+    border: 1px solid #000;
+    box-shadow: none;
+    cursor: pointer;
   }
 
   .gallery-item img {
@@ -644,4 +812,167 @@ const nextProject = getNextProject(project.slug);
       padding-left: 0;
     }
   }
+
+  /* Lightbox */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-content {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .lightbox-close:hover {
+    opacity: 1;
+  }
+
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 1rem;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .lightbox-nav:hover {
+    opacity: 1;
+  }
+
+  .lightbox-prev {
+    left: 1rem;
+  }
+
+  .lightbox-next {
+    right: 1rem;
+  }
+
+  .lightbox-counter {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
 </style>
+
+<script>
+  // Lightbox functionality
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCounter = document.getElementById('lightbox-counter');
+  const galleryItems = document.querySelectorAll('.gallery-item[data-lightbox]');
+
+  if (lightbox && galleryItems.length > 0) {
+    const images = Array.from(galleryItems).map(item => item.querySelector('img')?.src).filter(Boolean);
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex];
+      lightboxCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+    }
+
+    // Click handlers
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+    document.getElementById('lightbox-next')?.addEventListener('click', showNext);
+    document.getElementById('lightbox-prev')?.addEventListener('click', showPrev);
+
+    // Click outside to close
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+
+    // Touch swipe support
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    });
+    lightbox.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) showNext();
+        else showPrev();
+      }
+    });
+  }
+</script>

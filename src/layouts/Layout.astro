@@ -5,6 +5,7 @@ export interface Props {
   lang?: 'en' | 'de';
   canonicalUrl?: string;
   ogImage?: string;
+  solidNav?: boolean;
 }
 
 const {
@@ -12,7 +13,8 @@ const {
   description = "Custom automation, integrations, and software development for e-commerce brands. Based in Germany, working globally.",
   lang = 'en',
   canonicalUrl,
-  ogImage = '/images/og-image.jpg'
+  ogImage = '/images/og-image.jpg',
+  solidNav = false
 } = Astro.props;
 
 const siteUrl = 'https://fabianeppinger.com';
@@ -120,7 +122,7 @@ const navItems = lang === 'de'
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="nav" id="navigation">
+    <nav class={`nav ${solidNav ? 'nav-solid' : ''}`} id="navigation">
       <div class="nav-container">
         <a href={lang === 'de' ? '/de' : '/'} class="nav-logo">
           <span class="logo-text">FE</span>
