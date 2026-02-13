@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 50" preserveAspectRatio="none">
+  <defs>
+    <filter id="rough" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Main brush body with irregular edges -->
+  <path filter="url(#rough)" fill="#00FF9C" opacity="0.9" d="
+    M5,28
+    C8,20 12,18 18,22
+    C25,16 32,14 42,18
+    C48,12 58,10 72,15
+    C85,9 98,8 115,14
+    C130,7 148,6 168,12
+    C188,5 208,4 230,10
+    C252,4 275,5 298,11
+    C318,6 338,8 358,14
+    C375,10 388,12 395,18
+    L398,25
+    C395,32 385,36 368,32
+    C348,38 328,40 305,35
+    C282,42 258,43 232,37
+    C208,44 182,45 158,38
+    C135,44 112,45 88,39
+    C65,44 45,43 28,37
+    C15,42 8,38 5,32
+    Z"/>
+  <!-- Additional texture strokes -->
+  <path fill="#00FF9C" opacity="0.5" d="M2,25 Q15,18 35,24 Q45,20 55,26 Q62,22 70,25" stroke="#00FF9C" stroke-width="2"/>
+  <path fill="#00FF9C" opacity="0.4" d="M380,22 Q390,18 398,24" stroke="#00FF9C" stroke-width="3"/>
+  <ellipse cx="12" cy="26" rx="8" ry="4" fill="#00FF9C" opacity="0.6"/>
+  <ellipse cx="392" cy="24" rx="6" ry="3" fill="#00FF9C" opacity="0.5"/>
+</svg>

@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page Not Found - Fabian Eppinger" solidNav={true}>
+  <div class="error-page">
+    <div class="error-container">
+      <span class="error-code">404</span>
+      <h1 class="error-title">Page not found</h1>
+      <p class="error-description">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+      <a href="/" class="error-cta">
+        Back to Home
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .error-page {
+    background: #0c0c0c;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .error-container {
+    text-align: center;
+    max-width: 500px;
+  }
+
+  .error-code {
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 20vw, 12rem);
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .error-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .error-description {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #a7a9ac;
+    margin-bottom: 2.5rem;
+  }
+
+  .error-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: var(--color-accent);
+    color: #0c0c0c;
+    font-family: var(--font-display);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 100px;
+    transition: all 0.3s var(--ease-out-quart);
+  }
+
+  .error-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 255, 156, 0.3);
+  }
+
+  .error-cta svg {
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+
+  .error-cta:hover svg {
+    transform: translateX(4px);
+  }
+</style>

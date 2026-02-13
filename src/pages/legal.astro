@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Legal Notice - Fabian Eppinger" solidNav={true}>
+  <div class="legal-page">
+    <div class="legal-container">
+      <h1>Legal Notice (Impressum)</h1>
+
+      <section class="legal-section">
+        <h2>Information according to § 5 TMG</h2>
+        <p>
+          Fabian Eppinger<br />
+          [Your Street Address]<br />
+          [Your Postal Code, City]<br />
+          Germany
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Contact</h2>
+        <p>
+          Email: fabian.eppinger@icloud.com
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>VAT ID</h2>
+        <p>
+          VAT identification number according to § 27a Umsatzsteuergesetz:<br />
+          [Your VAT ID if applicable]
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Responsible for content according to § 55 Abs. 2 RStV</h2>
+        <p>
+          Fabian Eppinger<br />
+          [Your Street Address]<br />
+          [Your Postal Code, City]<br />
+          Germany
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Dispute Resolution</h2>
+        <p>
+          The European Commission provides a platform for online dispute resolution (OS):
+          <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>
+        </p>
+        <p>
+          We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Liability for Contents</h2>
+        <p>
+          As a service provider, we are responsible for our own content on these pages according to § 7 paragraph 1 TMG under general laws. According to §§ 8 to 10 TMG, however, we are not obligated as a service provider to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.
+        </p>
+        <p>
+          Obligations to remove or block the use of information under general law remain unaffected. However, liability in this regard is only possible from the time of knowledge of a specific infringement. Upon becoming aware of corresponding infringements, we will remove this content immediately.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Liability for Links</h2>
+        <p>
+          Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the contents of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal contents were not recognizable at the time of linking.
+        </p>
+        <p>
+          However, permanent monitoring of the content of the linked pages is not reasonable without concrete evidence of a violation of the law. If we become aware of any infringements, we will remove such links immediately.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>Copyright</h2>
+        <p>
+          The contents and works created by the site operators on these pages are subject to German copyright law. Duplication, processing, distribution, or any form of commercialization of such material beyond the scope of the copyright law shall require the prior written consent of its respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use.
+        </p>
+        <p>
+          Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is identified as such. Should you nevertheless become aware of a copyright infringement, please inform us accordingly. If we become aware of any infringements, we will remove such content immediately.
+        </p>
+      </section>
+
+      <div class="back-link">
+        <a href="/">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-page {
+    background: #ffffff;
+    min-height: 100vh;
+    padding: clamp(6rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #0c0c0c;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-section {
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0c0c0c;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: #0c0c0c;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  .back-link {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .back-link a {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: #a7a9ac;
+    transition: color 0.3s ease;
+  }
+
+  .back-link a:hover {
+    color: #0c0c0c;
+  }
+</style>

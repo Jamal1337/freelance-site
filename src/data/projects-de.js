@@ -113,6 +113,36 @@ export const projects = [
     },
     size: "tall",
     year: "2023"
+  },
+  {
+    slug: "blitz-landing-page",
+    title: "Lead-Generierungs Landing Page",
+    shortDescription: "Hochkonvertierende Landing Page für Partnership Ads Kampagnen.",
+    fullDescription: "Eine umfassende Lead-Generierungs Landing Page für Blitz Growth, eine Performance Marketing Agentur, die sich auf Partnership Ads spezialisiert hat, die Standard-Meta-Benchmarks um das 2-3-fache übertreffen. Die Seite ist darauf ausgelegt, kalten Anzeigen-Traffic in gebuchte Calls zu konvertieren, mit Video-Testimonials, Kundenergebnissen, einem detaillierten FAQ-Bereich und mehreren strategisch platzierten CTAs entlang der User Journey.",
+    challenge: "Blitz Growth benötigte eine hochkonvertierende Landing Page für ihre Meta-Werbekampagnen zur Bewerbung ihrer Partnership Ads Services. Die Seite musste potenzielle Kunden über einen relativ neuen Werbeansatz aufklären, schnell Vertrauen aufbauen und Kalender-Buchungen generieren — und das alles bei hervorragender Page Speed für den hohen bezahlten Traffic.",
+    solution: "Entwicklung einer inhaltsreichen Landing Page mit React, TypeScript und Vite für blitzschnelle Performance. Implementierung von flüssigen Scroll-Animationen mit Framer Motion, eingebetteten Video-Testimonials für Social Proof und UTM-Parameter-Tracking, das automatisch an alle Calendly-Buchungslinks angehängt wird. Die Seite enthält Vergleichsabschnitte, Prozess-Aufschlüsselungen, Kundenergebnisse mit spezifischen Metriken und einen FAQ-Bereich zur Einwandbehandlung.",
+    results: [
+      "Conversion-optimiert",
+      "Video-Testimonials",
+      "UTM-Tracking Integration",
+      "Framer Motion Animationen"
+    ],
+    tags: ["React", "TypeScript", "Vite", "Framer Motion"],
+    category: "Landing Page",
+    client: "Blitz Growth",
+    clientUrl: "https://blitz-growth.com",
+    url: "https://info.blitz-growth.com",
+    images: {
+      thumbnail: "/images/projects/blitz-landing-hero.png",
+      hero: "/images/projects/blitz-landing-hero.png",
+      gallery: [
+        "/images/projects/blitz-landing-hero.png",
+        "/images/projects/blitz-landing-form.png",
+        "/images/projects/blitz-landing-features.png"
+      ]
+    },
+    size: "standard",
+    year: "2024"
   }
 ];
 

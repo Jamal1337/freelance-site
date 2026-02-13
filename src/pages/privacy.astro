@@ -1,0 +1,197 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Privacy Policy - Fabian Eppinger" solidNav={true}>
+  <div class="legal-page">
+    <div class="legal-container">
+      <h1>Privacy Policy</h1>
+
+      <section class="legal-section">
+        <h2>1. Overview</h2>
+        <p>
+          The following gives a simple overview of what happens to your personal information when you visit this website. Personal information is any data with which you could be personally identified.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>2. Data Controller</h2>
+        <p>
+          The data controller for this website is:
+        </p>
+        <p>
+          Fabian Eppinger<br />
+          [Your Street Address]<br />
+          [Your Postal Code, City]<br />
+          Germany<br />
+          Email: fabian.eppinger@icloud.com
+        </p>
+        <p>
+          The data controller is the natural or legal person who alone or jointly with others decides on the purposes and means of processing personal data.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>3. Data Collection on This Website</h2>
+
+        <h3>Server Log Files</h3>
+        <p>
+          The website provider automatically collects and stores information that your browser automatically transmits to us in "server log files". These are:
+        </p>
+        <ul>
+          <li>Browser type and browser version</li>
+          <li>Operating system used</li>
+          <li>Referrer URL</li>
+          <li>Host name of the accessing computer</li>
+          <li>Time of the server request</li>
+          <li>IP address</li>
+        </ul>
+        <p>
+          This data will not be combined with data from other sources. The basis for data processing is Art. 6 (1) (f) GDPR, which allows the processing of data to fulfill a contract or for measures preliminary to a contract.
+        </p>
+
+        <h3>Contact Form</h3>
+        <p>
+          If you send us inquiries via the contact form, your data from the inquiry form, including the contact data you provide there, will be stored by us for the purpose of processing the inquiry and in case of follow-up questions. We do not share this data without your consent.
+        </p>
+        <p>
+          The processing of the data entered into the contact form is based exclusively on your consent (Art. 6 (1) (a) GDPR). You can revoke your consent at any time. An informal email to us is sufficient. The data processed before we receive your request may still be legally processed.
+        </p>
+
+        <h3>Calendly</h3>
+        <p>
+          We use Calendly for scheduling meetings. When you book a meeting, Calendly collects data necessary for scheduling (name, email, meeting time). Please refer to Calendly's privacy policy for more information: <a href="https://calendly.com/privacy" target="_blank" rel="noopener noreferrer">https://calendly.com/privacy</a>
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>4. Your Rights</h2>
+        <p>You have the following rights with respect to your personal data:</p>
+        <ul>
+          <li>Right to access</li>
+          <li>Right to rectification</li>
+          <li>Right to erasure</li>
+          <li>Right to restriction of processing</li>
+          <li>Right to data portability</li>
+          <li>Right to object</li>
+        </ul>
+        <p>
+          If you believe that the processing of your data violates data protection law or your data protection rights have been violated, you can complain to the supervisory authority. In Germany, this is the data protection authority of the federal state in which you live or work.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>5. SSL/TLS Encryption</h2>
+        <p>
+          This site uses SSL/TLS encryption for security reasons and for the protection of the transmission of confidential content. You can recognize an encrypted connection by the fact that the address line of the browser changes from "http://" to "https://" and by the lock symbol in your browser line.
+        </p>
+      </section>
+
+      <section class="legal-section">
+        <h2>6. Changes to This Privacy Policy</h2>
+        <p>
+          We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.
+        </p>
+        <p>
+          Last updated: February 2026
+        </p>
+      </section>
+
+      <div class="back-link">
+        <a href="/">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .legal-page {
+    background: #ffffff;
+    min-height: 100vh;
+    padding: clamp(6rem, 10vw, 8rem) 0 clamp(4rem, 8vw, 6rem);
+  }
+
+  .legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #0c0c0c;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .legal-section {
+    margin-bottom: 2.5rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0c0c0c;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0c0c0c;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    margin: 0 0 1rem 1.5rem;
+    padding: 0;
+  }
+
+  li {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: #0c0c0c;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  .back-link {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .back-link a {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-decoration: none;
+    color: #a7a9ac;
+    transition: color 0.3s ease;
+  }
+
+  .back-link a:hover {
+    color: #0c0c0c;
+  }
+</style>
