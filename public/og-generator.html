@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OG Image Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+
+    .og-image {
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+      display: flex;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+    }
+
+    /* Background pattern */
+    .og-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(0, 255, 156, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 156, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    /* Grid pattern overlay */
+    .og-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .content {
+      flex: 1;
+      padding: 70px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 255, 156, 0.15);
+      border: 1px solid rgba(0, 255, 156, 0.3);
+      padding: 10px 20px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+      width: fit-content;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: #00FF9C;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .badge-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: #00FF9C;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .headline {
+      font-family: 'Inter', sans-serif;
+      font-size: 64px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .headline .accent {
+      color: #00FF9C;
+    }
+
+    .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      color: #a7a9ac;
+      margin-bottom: 40px;
+      max-width: 500px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      display: flex;
+      gap: 40px;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stat-icon svg {
+      width: 20px;
+      height: 20px;
+      color: #00FF9C;
+    }
+
+    .stat-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .stat-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .visual {
+      width: 420px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-container {
+      position: relative;
+    }
+
+    .photo {
+      width: 300px;
+      height: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Floating elements */
+    .float-card {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .float-card-1 {
+      top: 20px;
+      right: -40px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .float-card-1 .icon {
+      width: 36px;
+      height: 36px;
+      background: #0c0c0c;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .float-card-1 .text {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0c0c0c;
+    }
+
+    .float-card-2 {
+      bottom: 40px;
+      left: -60px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .float-card-2 .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .float-card-2 .tags {
+      display: flex;
+      gap: 6px;
+    }
+
+    .float-card-2 .tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #0c0c0c;
+      background: #f0f0f0;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .instructions {
+      margin-top: 30px;
+      color: #666;
+      font-family: sans-serif;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="og-image">
+      <div class="content">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">Freelance Developer & Performance Marketer</span>
+        </div>
+
+        <h1 class="headline">
+          Shopify · Software ·<br>
+          <span class="accent">Marketing</span>
+        </h1>
+
+        <p class="subtitle">
+          Custom tools, landing pages, and Meta ads for e-commerce & lead generation.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-value">8+ Years</span>
+              <span class="stat-label">Experience</span>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="stat-icon">
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-value">20+ Projects</span>
+              <span class="stat-label">Delivered</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="visual">
+        <div class="photo-container">
+          <div class="photo">
+            <img src="/images/fabian-profile.webp" alt="Fabian Eppinger" />
+          </div>
+
+          <div class="float-card float-card-1">
+            <div class="icon">🇩🇪</div>
+            <span class="text">Based in Germany</span>
+          </div>
+
+          <div class="float-card float-card-2">
+            <span class="label">Tech Stack</span>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">Shopify</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="instructions">
+      Screenshot the card above (1200x630px) → Save as og-image.jpg → Move to /public/images/
+    </p>
+  </div>
+</body>
+</html>

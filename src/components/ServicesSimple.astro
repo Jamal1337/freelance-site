@@ -1,28 +1,34 @@
 ---
 const services = [
   {
-    number: "01",
     title: "Custom Software",
-    description: "Bespoke tools and systems built for your specific workflows. From internal dashboards to customer-facing apps.",
-    examples: ["Admin Dashboards", "Inventory Systems", "Reporting Tools", "Custom Apps"]
+    description: "Internal tools, dashboards, CRMs, and automation systems built for your specific workflows.",
+    tags: ["React", "Node.js", "Python", "PostgreSQL"]
   },
   {
-    number: "02",
-    title: "E-commerce Integrations",
-    description: "Connect your tech stack and extend your platform. Shopify apps, headless builds, and third-party integrations.",
-    examples: ["Shopify Apps", "Headless Storefronts", "ERP Connections", "Payment Systems"]
+    title: "Shopify Development",
+    description: "Custom apps, theme development, and headless storefronts for e-commerce brands.",
+    tags: ["Shopify Apps", "Liquid", "Hydrogen", "Headless"]
   },
   {
-    number: "03",
-    title: "Messaging Automation",
-    description: "Automated customer communication that drives revenue. WhatsApp, email flows, and conversational systems.",
-    examples: ["WhatsApp Business", "Klaviyo Flows", "SMS Campaigns", "Chatbots"]
+    title: "Landing Pages",
+    description: "High-converting pages optimized for paid traffic campaigns. Fast, mobile-first, conversion-focused.",
+    tags: ["React", "Vite", "A/B Testing", "Lead Gen"]
   },
   {
-    number: "04",
-    title: "Growth Infrastructure",
-    description: "The technical backbone for scaling. Analytics, attribution, and the systems that inform decisions.",
-    examples: ["Analytics Pipelines", "Attribution Systems", "A/B Testing", "Data Warehouses"]
+    title: "Marketing Tools",
+    description: "Attribution systems, analytics dashboards, and reporting tools that show where revenue comes from.",
+    tags: ["Meta API", "GA4", "Custom Attribution", "Dashboards"]
+  },
+  {
+    title: "Websites",
+    description: "Full websites built with modern tech stacks. From portfolio sites to complex web applications.",
+    tags: ["Next.js", "Astro", "TypeScript", "Tailwind"]
+  },
+  {
+    title: "Performance Marketing",
+    description: "Meta ads automation, campaign management tools, comment moderation, and optimization systems.",
+    tags: ["Meta Ads", "Automation", "Bid Rules", "Reporting"]
   }
 ];
 ---
@@ -37,12 +43,12 @@ const services = [
           <span class="label-text">Services</span>
         </div>
         <h2 class="services-title">
-          What I <span class="title-accent">build</span>
+          What I <span class="title-accent">do</span>
         </h2>
       </div>
       <div class="header-right">
         <p class="services-subtitle">
-          End-to-end development for e-commerce brands. From idea to production.
+          Development and marketing for e-commerce and lead generation. From landing pages to complex automation.
         </p>
       </div>
     </header>
@@ -51,12 +57,11 @@ const services = [
     <div class="services-grid">
       {services.map((service) => (
         <div class="service-card">
-          <span class="service-number">{service.number}</span>
           <h3 class="service-title">{service.title}</h3>
           <p class="service-description">{service.description}</p>
-          <div class="service-examples">
-            {service.examples.map((example) => (
-              <span class="example-tag">{example}</span>
+          <div class="service-tags">
+            {service.tags.map((tag) => (
+              <span class="service-tag">{tag}</span>
             ))}
           </div>
         </div>
@@ -136,72 +141,69 @@ const services = [
   /* Services Grid */
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(1.5rem, 3vw, 2rem);
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2vw, 1.5rem);
   }
 
   .service-card {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: clamp(2rem, 4vw, 3rem);
+    padding: clamp(1.5rem, 3vw, 2rem);
     transition: all 0.4s var(--ease-out-quart);
   }
 
   .service-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .service-number {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-accent);
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-accent);
   }
 
   .service-title {
     font-family: var(--font-display);
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-size: clamp(1.125rem, 1.5vw, 1.375rem);
     font-weight: 700;
     color: #ffffff;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
   }
 
   .service-description {
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
     color: #a7a9ac;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
-  .service-examples {
+  .service-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.375rem;
   }
 
-  .example-tag {
+  .service-tag {
     font-family: var(--font-mono);
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
     letter-spacing: 0.03em;
-    color: rgba(255, 255, 255, 0.5);
-    padding: 0.375rem 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 100px;
+    color: rgba(255, 255, 255, 0.4);
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
     transition: all 0.3s var(--ease-out-quart);
   }
 
-  .service-card:hover .example-tag {
-    border-color: rgba(255, 255, 255, 0.2);
+  .service-card:hover .service-tag {
+    background: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.7);
   }
 
   /* Responsive */
-  @media (max-width: 968px) {
+  @media (max-width: 1200px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
     .services-header {
       grid-template-columns: 1fr;
     }
